@@ -13,3 +13,4 @@ Compile the project and use `ft_printf` like `printf`:
 ```c
 ft_printf("Hello %s! Number: %d\n", "world", 42);
 
+Additions 1
