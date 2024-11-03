@@ -99,8 +99,5 @@ Through this project, the following skills are developed:
 - **Error Handling**: Managing unsupported or incorrect format specifiers.
 - **Memory Management**: Efficient handling of buffers to ensure stability and avoid memory leaks.
 
-## License
-This project is licensed under the MIT License. Refer to the `LICENSE` file for more details.
-
 ## Acknowledgments
 This project was developed as part of the 42 School curriculum to gain experience in low-level C programming and understand the mechanisms behind standard library functions.
