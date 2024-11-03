@@ -13,6 +13,7 @@ This `ft_printf` project includes the following key features:
   - `%u` - Unsigned integer
   - `%x` and `%X` - Hexadecimal (lowercase and uppercase)
   - `%p` - Pointer address
+  - `%%` - Percent symbol
 - **Flags**: Supports common flags such as:
   - `-` - Left-justify the output within the given field width
   - `0` - Pads with zeros instead of spaces
@@ -22,11 +23,33 @@ This `ft_printf` project includes the following key features:
 - **Custom Parsing and Error Handling**: A parser processes the format string to interpret specifiers, flags, width, and precision settings, with custom error handling to manage unsupported format options.
 
 ## Code Structure
-The code is organized into several files, each handling different responsibilities:
-- **`ft_printf.c`**: The main function that interprets the format string and calls helper functions based on the format specifiers.
-- **`parsing.c`**: Handles parsing of format specifiers, flags, width, and precision modifiers, validating input to ensure correct formatting.
-- **`specifier_functions.c`**: Contains helper functions for processing specific format specifiers, such as characters, strings, integers, unsigned integers, and hexadecimal conversions.
-- **`utility.c`**: Includes helper functions for memory management, buffer handling, and string manipulation.
+The project is organized into three primary files:
+1. **`ft_printf.c`**:
+   - Contains the main `ft_printf` function, which parses the format string and calls helper functions for each specifier.
+   - Uses the `process_format_specifier` function to identify and handle each format specifier encountered in the format string.
+2. **`ft_printf.h`**:
+   - Header file defining function prototypes and necessary includes, such as `<stdarg.h>` for variadic argument handling and `<unistd.h>` for low-level I/O.
+3. **`ft_printf_part2.c`**:
+   - Includes additional helper functions that handle unsigned integers, hexadecimal numbers, and memory addresses. These functions provide support for `%u`, `%x`, `%X`, and `%p`.
+
+## Functionality and Functions
+### Main Functions
+- **`ft_printf(const char *str, ...)`**: Main function that iterates through the format string `str`, identifying format specifiers and invoking appropriate handlers. It returns the total character count of the output.
+- **`process_format_specifier(char next, va_list args)`**: Handles each format specifier encountered in `ft_printf`:
+  - `%c` - Calls `ft_putchar` to print a character.
+  - `%s` - Calls `ft_putstr` to print a string.
+  - `%d`, `%i` - Calls `ft_putnumbr` for signed integers.
+  - `%u` - Calls `ft_putunumbr` for unsigned integers.
+  - `%x`, `%X` - Calls `ft_puthexadecimal` with lowercase or uppercase hexadecimal representation.
+  - `%p` - Calls `ft_putaddress` to print a pointer address.
+
+### Helper Functions
+- **`ft_putchar(int c)`**: Writes a single character `c` to standard output.
+- **`ft_putstr(char *s)`**: Writes a null-terminated string `s` to standard output.
+- **`ft_putnumbr(int number)`**: Recursively handles and prints signed integers, managing edge cases like `INT_MIN`.
+- **`ft_putunumbr(unsigned int number)`**: Recursively handles and prints unsigned integers.
+- **`ft_puthexadecimal(unsigned int number, char *base)`**: Recursively prints an unsigned integer in hexadecimal format, using the specified base for uppercase or lowercase representation.
+- **`ft_putaddress(void *ptr)`**: Converts a pointer to a hexadecimal string representation, prefixing it with `0x`.
 
 ## Installation
 To use `ft_printf` in your own project:
@@ -64,18 +87,20 @@ ft_printf("Integer: %d\n", 123);                  // Output: Integer: 123
 ft_printf("Unsigned: %u\n", 456);                 // Output: Unsigned: 456
 ft_printf("Hex (lowercase): %x\n", 255);          // Output: Hex (lowercase): ff
 ft_printf("Hex (uppercase): %X\n", 255);          // Output: Hex (uppercase): FF
-ft_printf("Pointer: %p\n", &variable);            // Output: Pointer: 0x7ffeedcba987
-ft_printf("Formatted number: %05d\n", 42);        // Output: Formatted number: 00042
-ft_printf("Left-justified: %-5d\n", 42);          // Output: Left-justified: 42   
-ft_printf("Precision: %.2f\n", 3.14159);          // Output: Precision: 3.14
+ft_printf("Pointer: %p\n", &main);                // Output: Pointer: 0x[address]
+ft_printf("Left-justify: %-5d!\n", 42);           // Output: Left-justify: 42   !
+ft_printf("Zero-padding: %05d\n", 42);            // Output: Zero-padding: 00042
 ```
 
 ## Learning Objectives
-This project focuses on developing the following skills:
-- **Variadic Functions**: Using `va_list`, `va_start`, `va_arg`, and `va_end` to process a variable number of arguments.
-- **Memory Management**: Efficient handling of buffers to avoid memory leaks and ensure smooth performance.
-- **Error Handling**: Managing unsupported or incorrect format specifiers and handling edge cases.
-- **Modular Code Structure**: Organizing the project to separate parsing, formatting, and output functions, enhancing readability and maintainability.
+Through this project, the following skills are developed:
+- **Variadic Functions**: Usage of `va_list`, `va_start`, `va_arg`, and `va_end` to handle variable arguments.
+- **Recursive Printing**: Techniques for recursively handling integer and hexadecimal conversions.
+- **Error Handling**: Managing unsupported or incorrect format specifiers.
+- **Memory Management**: Efficient handling of buffers to ensure stability and avoid memory leaks.
+
+## License
+This project is licensed under the MIT License. Refer to the `LICENSE` file for more details.
 
 ## Acknowledgments
-This project was developed as part of the 42 School curriculum to gain practical programming experience in C and understand the inner workings of commonly used functions.
+This project was developed as part of the 42 School curriculum to gain experience in low-level C programming and understand the mechanisms behind standard library functions.
