@@ -77,8 +77,5 @@ This project focuses on developing the following skills:
 - **Error Handling**: Managing unsupported or incorrect format specifiers and handling edge cases.
 - **Modular Code Structure**: Organizing the project to separate parsing, formatting, and output functions, enhancing readability and maintainability.
 
-## License
-This project is open-source and available under the MIT License. See the `LICENSE` file for more details.
-
 ## Acknowledgments
 This project was developed as part of the 42 School curriculum to gain practical programming experience in C and understand the inner workings of commonly used functions.
